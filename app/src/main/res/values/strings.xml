@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CovidTracker</string>
+    <string name="updated_at_may_29_2021">Updated at May, 20, 2021</string>
+    <string name="india">India</string>
+    <string name="todo">TODO</string>
+    <string name="conform">Conform</string>
+    <string name="active">Active</string>
+    <string name="recovered">Recovered</string>
+    <string name="death">Death</string>
+    <string name="test">Tests</string>
+    <string name="total_cases">Total Cases</string>
+    <string name="country_name">Country Name</string>
+    <string name="search_here">Search here...</string>
+    <!--    <string name="google_maps_key" translatable="false">AIzaSyBWE1u910Zg3ZLd89eDV2czbPkboJlZLjc</string>-->
+    <string name="you_re_offline">You\'re Offline..</string>
+    <string name="reffresh">Reffresh</string>
+</resources>

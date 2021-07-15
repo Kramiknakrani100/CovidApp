@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".SecondMainActivity"
+    android:layout_margin="20dp"
+    android:background="#0F1F2C">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amaranth_bold"
+        android:textColor="@color/white"
+        android:text="name"
+        android:padding="8dp"
+        android:layout_margin="15dp"
+        android:textSize="25sp"
+        />
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amaranth_bold"
+        android:text="state"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:layout_margin="15dp"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/district"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amaranth_bold"
+        android:text="district"
+        android:textColor="@color/white"
+        android:padding="8dp"
+        android:layout_margin="15dp"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/amaranth_bold"
+        android:textColor="@color/white"
+        android:text="fee"
+        android:padding="8dp"
+        android:layout_margin="15dp"
+        android:textSize="25sp"
+        />
+</androidx.appcompat.widget.LinearLayoutCompat>
