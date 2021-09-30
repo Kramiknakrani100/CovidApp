@@ -15,7 +15,6 @@ public class ApiUtilites {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-
         return retrofit.create(Apiinterface.class);
     }
 }

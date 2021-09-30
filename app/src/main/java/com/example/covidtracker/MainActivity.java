@@ -28,7 +28,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class MainActivity extends AppCompatActivity{
 
     private TextView totalConform, totalActive, totalRecovered, totalDeath, totalTests;
@@ -126,7 +125,6 @@ public class MainActivity extends AppCompatActivity{
                         }
 
                     }
-
                     @Override
                     public void onFailure(Call<List<CountryData>> call, Throwable t) {
                        // Toast.makeText(MainActivity.this, "Error :- "+t.getMessage(), Toast.LENGTH_SHORT).show();

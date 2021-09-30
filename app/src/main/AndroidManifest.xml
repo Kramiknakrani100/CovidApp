@@ -15,8 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_covid1"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidTracker">
-        <activity android:name=".SecondMainActivity">
-        </activity>
         <activity android:name=".offlineActivity"></activity>
 
         <meta-data
@@ -30,7 +28,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
