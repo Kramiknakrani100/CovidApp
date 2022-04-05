@@ -1,20 +1,18 @@
-package com.example.covidtracker.api;
+package com.example.covidtracker.api
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-public class ApiUtilites {
-
-    private static  Retrofit retrofit = null;
-
-    public static Apiinterface getApiInterface() {
-        if (retrofit == null) {
-
-            retrofit = new Retrofit.Builder()
+object ApiUtilites {
+    private var retrofit: Retrofit? = null
+    val apiInterface: Apiinterface
+        get() {
+            if (retrofit == null) {
+                retrofit = Retrofit.Builder()
                     .baseUrl(Apiinterface.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+                    .build()
+            }
+            return retrofit!!.create(Apiinterface::class.java)
         }
-        return retrofit.create(Apiinterface.class);
-    }
 }

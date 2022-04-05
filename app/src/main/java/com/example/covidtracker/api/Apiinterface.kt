@@ -1,14 +1,15 @@
-package com.example.covidtracker.api;
+package com.example.covidtracker.api
 
-import java.util.List;
+import retrofit2.http.GET
+import com.example.covidtracker.api.CountryData
+import retrofit2.Call
 
-import retrofit2.Call;
-import retrofit2.http.GET;
+interface Apiinterface {
+    @get:GET("countries")
+    val countryData: Call<List<CountryData>>
 
-public interface Apiinterface {
-    // URL
-    static final String BASE_URL = "https://corona.lmao.ninja/v2/";
-
-    @GET("countries")
-    Call<List<CountryData>> getCountryData();
+    companion object {
+        // URL
+        const val BASE_URL = "https://corona.lmao.ninja/v2/"
+    }
 }

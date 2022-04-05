@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        ApiUtilites.getApiInterface().countryData
-            .enqueue(object : Callback<List<CountryData>?> {
+        ApiUtilites.apiInterface.countryData
+            .enqueue(object : Callback<List<CountryData>> {
                 @SuppressLint("SetTextI18n")
                 override fun onResponse(
                     call: Call<List<CountryData>?>,

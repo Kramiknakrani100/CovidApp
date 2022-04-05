@@ -1,81 +1,63 @@
-package com.example.covidtracker;
+package com.example.covidtracker
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.content.Context
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.covidtracker.api.CountryData
+import java.text.NumberFormat
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-import com.example.covidtracker.api.CountryData;
-
-import java.text.NumberFormat;
-import java.util.List;
-import java.util.Map;
-
-public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
-
-    private Context context;
-    private List<CountryData> list;
-
-    public CountryAdapter(Context context, List<CountryData> list) {
-        this.context = context;
-        this.list = list;
+class CountryAdapter(private val context: Context, private var list: List<CountryData>) :
+    RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val listItem =
+            layoutInflater.inflate(R.layout.country_item, parent, false)
+        return ViewHolder(listItem)
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.country_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val data = list[position]
+        holder.cases.text = NumberFormat.getInstance().format(data.cases.toInt().toLong())
+        holder.countryname.text = data.country
+        holder.sno.text = (position + 1).toString()
+        val img = data.countryInfo
+        Glide.with(context).load(img["flag"]).into(holder.flag)
+        holder.itemView.setOnClickListener { v: View? ->
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("country", data.country)
+            context.startActivity(intent)
+        }
     }
 
-    @Override
-    public void onBindViewHolder(CountryAdapter.ViewHolder holder, int position) {
-
-        CountryData data = list.get(position);
-        holder.cases.setText(NumberFormat.getInstance().format(Integer.parseInt(data.getCases())));
-        holder.countryname.setText(data.getCountry());
-        holder.sno.setText(String.valueOf(position+1));
-
-        Map<String,String> img = data.getCountryInfo();
-
-        Glide.with(context).load(img.get("flag")).into(holder.flag);
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context,MainActivity.class);
-            intent.putExtra("country",data.getCountry());
-            context.startActivity(intent);
-        });
+    fun filterList(filterlist: List<CountryData>) {
+        list = filterlist
+        notifyDataSetChanged()
     }
 
-    public void filterList(List<CountryData> filterlist){
-        list = filterlist;
-        notifyDataSetChanged();
+    override fun getItemCount(): Int {
+        return list.size
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val sno: TextView
+        val countryname: TextView
+        val cases: TextView
+        val flag: ImageView
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView sno,countryname,cases;
-        private ImageView flag;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            sno = itemView.findViewById(R.id.sno);
-            countryname = itemView.findViewById(R.id.country_name);
-            cases = itemView.findViewById(R.id.cases);
-            flag = itemView.findViewById(R.id.flag);
+        init {
+            sno = itemView.findViewById(R.id.sno)
+            countryname = itemView.findViewById(R.id.country_name)
+            cases = itemView.findViewById(R.id.cases)
+            flag = itemView.findViewById(R.id.flag)
         }
     }
 }

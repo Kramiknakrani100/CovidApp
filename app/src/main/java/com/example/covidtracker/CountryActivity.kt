@@ -30,16 +30,17 @@ class CountryActivity : AppCompatActivity() {
         list = ArrayList()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
-        adapter = CountryAdapter(this, list)
+        adapter = CountryAdapter(this, list as ArrayList<CountryData>)
         recyclerView.adapter = adapter
         dialog = ProgressDialog(this)
         dialog!!.setMessage("Loading...")
         dialog!!.setCancelable(false)
         dialog!!.show()
-        ApiUtilites.getApiInterface().countryData.enqueue(object : Callback<List<CountryData>?> {
+
+        ApiUtilites.apiInterface.countryData.enqueue(object : Callback<List<CountryData>> {
             override fun onResponse(
-                call: Call<List<CountryData>?>,
-                response: Response<List<CountryData>?>
+                call: Call<List<CountryData>>,
+                response: Response<List<CountryData>>
             ) {
                 assert(response.body() != null)
                 (list as ArrayList<CountryData>).addAll(response.body()!!)
@@ -47,7 +48,7 @@ class CountryActivity : AppCompatActivity() {
                 dialog!!.dismiss()
             }
 
-            override fun onFailure(call: Call<List<CountryData>?>, t: Throwable) {
+            override fun onFailure(call: Call<List<CountryData>>, t: Throwable) {
                 Toast.makeText(this@CountryActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
