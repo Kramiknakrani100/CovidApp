@@ -39,7 +39,6 @@ public class CountryActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-
         adapter = new CountryAdapter(this,list);
         recyclerView.setAdapter(adapter);
 

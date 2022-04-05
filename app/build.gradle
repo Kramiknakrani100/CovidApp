@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "com.example.covidtracker"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
 
@@ -52,5 +53,10 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation 'com.google.maps.android:android-maps-utils:2.2.3'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

@@ -44,15 +44,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        second = findViewById(R.id.second);
-//        second.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this,SecondMainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         list = new ArrayList<>();
         if (getIntent().getStringExtra("country") != null)
             country = getIntent().getStringExtra("country");
@@ -64,7 +55,6 @@ public class MainActivity extends AppCompatActivity{
         cname.setText(country);
 
         cname.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CountryActivity.class)));
-
 
         ApiUtilites.getApiInterface().getCountryData()
                 .enqueue(new Callback<List<CountryData>>() {
@@ -119,17 +109,13 @@ public class MainActivity extends AppCompatActivity{
                                 pieChart.addPieSlice(new PieModel("Active", active, getResources().getColor(R.color.blue)));
                                 pieChart.addPieSlice(new PieModel("Recovered", recovered, getResources().getColor(R.color.green)));
                                 pieChart.addPieSlice(new PieModel("Death", death, getResources().getColor(R.color.red)));
-
                                 pieChart.startAnimation();
                             }
                         }
-
                     }
                     @Override
                     public void onFailure(Call<List<CountryData>> call, Throwable t) {
-                       // Toast.makeText(MainActivity.this, "Error :- "+t.getMessage(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this,offlineActivity.class);
-                        startActivity(intent);
+                        Toast.makeText(MainActivity.this, "Please Turn on Your Internet", Toast.LENGTH_LONG).show();
                     }
                 });
     }

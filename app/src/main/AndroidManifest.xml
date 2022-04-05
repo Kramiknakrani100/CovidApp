@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_covid1"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidTracker">
-        <activity android:name=".offlineActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,7 +24,8 @@
             android:name=".MapsActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".CountryActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

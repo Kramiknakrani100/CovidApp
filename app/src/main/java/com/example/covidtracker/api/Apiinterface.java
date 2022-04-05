@@ -11,5 +11,4 @@ public interface Apiinterface {
 
     @GET("countries")
     Call<List<CountryData>> getCountryData();
-
 }

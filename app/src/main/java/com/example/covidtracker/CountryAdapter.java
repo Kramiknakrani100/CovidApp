@@ -39,19 +39,11 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     public void onBindViewHolder(CountryAdapter.ViewHolder holder, int position) {
 
         CountryData data = list.get(position);
-
         holder.cases.setText(NumberFormat.getInstance().format(Integer.parseInt(data.getCases())));
         holder.countryname.setText(data.getCountry());
         holder.sno.setText(String.valueOf(position+1));
 
         Map<String,String> img = data.getCountryInfo();
-
-        //holder.sno.setText(img.get("long"));
-//
-//        String latitude = img.get("lat");
-//        String longitude = img.get("long");
-//        Log.d("kaka","lat is = "+latitude);
-//        Log.d("kaka","long is = "+longitude);
 
         Glide.with(context).load(img.get("flag")).into(holder.flag);
 
