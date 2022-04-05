@@ -1,62 +1,46 @@
-package com.example.covidtracker;
+package com.example.covidtracker
 
+import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.TextView;
-import android.widget.Toast;
+class MapsActivity : FragmentActivity(), OnMapReadyCallback {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-
-import androidx.fragment.app.FragmentActivity;
-
-import com.example.covidtracker.R;
-import com.google.android.gms.common.server.converter.StringToIntConverter;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
-    TextView cn;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-//        TextView cn = (TextView) findViewById(R.id.textView2);
         // remove title
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_maps);
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+        setContentView(R.layout.activity_maps)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        assert mapFragment != null;
-        mapFragment.getMapAsync(this);
-
+        val mapFragment = (supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment?)!!
+        mapFragment.getMapAsync(this)
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        Intent intent = getIntent();
-        String latitud = intent.getExtras().getString("lati");
-        String longitud = intent.getExtras().getString("longi");
-        String country = intent.getExtras().getString("country");
-        //Log.d("rohan","Done!! "+ latitud + " " + longitud);
+    override fun onMapReady(googleMap: GoogleMap) {
+        val intent = intent
+        val latitud = intent.extras!!.getString("lati")
+        val longitud = intent.extras!!.getString("longi")
+        val country = intent.extras!!.getString("country")
         // Add a marker in Sydney and move the camera
-        LatLng cLatLong = new LatLng(Float.parseFloat(latitud), Float.parseFloat(longitud));
-        googleMap.addMarker(new MarkerOptions().position(cLatLong).title("Marker in " + country));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(cLatLong));
-
-        Toast.makeText(this, "Map of "+country, Toast.LENGTH_SHORT).show();
-
+        val cLatLong = LatLng(
+            latitud!!.toFloat().toDouble(), longitud!!.toFloat().toDouble()
+        )
+        googleMap.addMarker(MarkerOptions().position(cLatLong).title("Marker in $country"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(cLatLong))
+        Toast.makeText(this, "Map of $country", Toast.LENGTH_SHORT).show()
     }
 }
